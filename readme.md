@@ -43,3 +43,9 @@ reconciler工作方式
 
 代表更新的数据结构——Update
 消费update的数据结构UpdateQueue
+
+需要考虑的：
+
+1. 更新可能发生于任意组件，而更新流程是从根节点递归的
+2. 需要1个统一的根节点保存通用信息
+   ![alt text](../imgs/react/createRoot.png)

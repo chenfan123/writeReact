@@ -1,17 +1,41 @@
 import { beginWork } from './beginWork';
 import { completeWork } from './completeWork';
-import { FiberNode } from './fiber';
+import { createWorkInProgress, FiberNode, FiberRootNode } from './fiber';
+import { HostRoot } from './workTags';
 
 // 完整的工作循环文件
 
 let workInProgress: FiberNode | null = null; // 一个指针指向当前正在工作的fiberNode
 
 // 初始化，让workInProgress指向遍历的第一个fiberNode
-function prepareFreshStack(fiber: FiberNode) {
-	workInProgress = fiber;
+function prepareFreshStack(root: FiberRootNode) {
+	workInProgress = createWorkInProgress(root.current, {});
 }
 
-function renderRoot(root: FiberNode) {
+// 在fiber中调度update，连接 container 和 renderRoot方法
+export function scheduleUpdateOnFiber(fiber: FiberNode) {
+	// @TODO 调度功能
+	// 从当前更新的fiber遍历到fiberRootNode
+	const root = markUpdateFromFiberToRoot(fiber);
+}
+
+// 从当前节点遍历到根节点
+function markUpdateFromFiberToRoot(fiber: FiberNode) {
+	let node = fiber;
+	let parent = node.return;
+	while (parent !== null) {
+		// !== null就说明当前节点是普通的fiberNode
+		node = parent;
+		parent = node.return;
+	}
+	// 跳出循环,一般就是到了hostRootFiber
+	if (node.tag === HostRoot) {
+		return node.stateNode; // 就是fiberRootNode
+	}
+	return null;
+}
+
+function renderRoot(root: FiberRootNode) {
 	prepareFreshStack(root);
 	// 执行递归流程
 	do {
