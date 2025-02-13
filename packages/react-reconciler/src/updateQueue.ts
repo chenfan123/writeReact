@@ -18,18 +18,18 @@ export const createUpdate = <State>(action: Action<State>): Update<State> => {
 };
 
 //消费Update的数据结构UpdateQueue: UpdateQueue里面有一个shared.pending这个字段，这个字段指向update
-export const createUpdateQueue = <Action>() => {
+export const createUpdateQueue = <State>() => {
 	return {
 		shared: {
 			pending: null
 		}
-	} as UpdateQueue<Action>;
+	} as UpdateQueue<State>;
 };
 
 // 往UpdateQueue里增加Update
-export const enqueueUpdate = <Action>(
-	updateQueue: UpdateQueue<Action>,
-	update: Update<Action>
+export const enqueueUpdate = <State>(
+	updateQueue: UpdateQueue<State>,
+	update: Update<State>
 ) => {
 	updateQueue.shared.pending = update;
 };

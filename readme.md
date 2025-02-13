@@ -49,3 +49,20 @@ reconciler工作方式
 1. 更新可能发生于任意组件，而更新流程是从根节点递归的
 2. 需要1个统一的根节点保存通用信息
    ![alt text](../imgs/react/createRoot.png)
+
+## mount流程
+
+目的：
+
+1. 生成wip fiberNode树
+2. 标记副作用flags
+
+更新流程：
+递： beginWork
+归： completeWork
+
+### beginWork
+
+当进入A组件的beginWork，会对比B的current fiberNode 和 B reactElement，生成B对应的wip fiberNode
+会标记2类与**结构变化**相关的flags（placement和childDeletion）
+不包含与**属性变化**相关的flag（Update）

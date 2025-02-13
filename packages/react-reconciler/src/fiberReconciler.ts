@@ -22,6 +22,7 @@ export function createContainer(container: Container) {
 /**
  * ReactDOM.createRoot().render()
  * 执行render方法之后，在render方法内部就会执行updateContainer方法
+ * 返回的element对于reactDom.createRoot(root).render(<App/>)来说，App组件对应的ReactElement就是这个element
  */
 export function updateContainer(
 	element: ReactElementType | null,
