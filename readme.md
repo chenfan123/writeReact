@@ -66,3 +66,27 @@ reconciler工作方式
 当进入A组件的beginWork，会对比B的current fiberNode 和 B reactElement，生成B对应的wip fiberNode
 会标记2类与**结构变化**相关的flags（placement和childDeletion）
 不包含与**属性变化**相关的flag（Update）
+
+#### HostRoot的beginWork
+
+1. 计算状态的最新值
+2. 创造子fiberNode
+
+#### HostComponent的beginWork
+
+1. 创造子fiberNode
+
+#### HostText
+
+没有beginWork工作流程，因为没有子节点
+
+> beginWork性能优化策略：
+> 构建好离屏DOM树，执行一次Placement操作
+
+### completeWork
+
+1. 对于host类型fiberNode，构建离屏DOM树
+2. 标记Update flag
+
+> completeWork性能优化
+> flags分布在不同fiberNode中，可以利用completeWork向上遍历的流程，将子fiberNode的flags冒泡到父fiberNode
