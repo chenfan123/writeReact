@@ -90,3 +90,22 @@ reconciler工作方式
 
 > completeWork性能优化
 > flags分布在不同fiberNode中，可以利用completeWork向上遍历的流程，将子fiberNode的flags冒泡到父fiberNode
+
+## RectDOM
+
+react内部3个阶段：
+
+1. schedule阶段
+2. render阶段(beginWork completeWork)
+3. commit阶段（commitWork）
+
+#### commit阶段
+
+- beforeMutation阶段
+- mutation阶段
+- layout阶段
+
+commit阶段要执行的任务：
+
+1. fiber树的切换
+2. 执行Placement对应操作
