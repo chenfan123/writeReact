@@ -19,6 +19,7 @@ export function scheduleUpdateOnFiber(fiber: FiberNode) {
 	// @TODO 调度功能
 	// 从当前更新的fiber遍历到fiberRootNode
 	const root = markUpdateFromFiberToRoot(fiber);
+	renderRoot(root);
 }
 
 // 从当前节点遍历到根节点

@@ -6,6 +6,7 @@ import { HostComponent, HostRoot, HostText } from './workTags';
 let nextEffect: FiberNode | null = null;
 export const commitMutationEffects = (finishedWork: FiberNode) => {
 	nextEffect = finishedWork;
+
 	while (nextEffect !== null) {
 		// 向下遍历
 		const child: FiberNode | null = nextEffect.child;
@@ -76,7 +77,7 @@ function appendPlacementNodeIntoContainer(
 ) {
 	// fiber 找到宿主环境host类型的fiber
 	if (finishedWork.tag === HostComponent || finishedWork.tag === HostText) {
-		appendChildToContainer(finishedWork.stateNode, hostParent);
+		appendChildToContainer(hostParent, finishedWork.stateNode);
 		return;
 	}
 	const child = finishedWork.child;

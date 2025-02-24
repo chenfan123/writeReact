@@ -109,3 +109,7 @@ commit阶段要执行的任务：
 
 1. fiber树的切换
 2. 执行Placement对应操作
+
+##### 如何支持FC？
+
+FC的工作同样植根于beginWork和completeWork
