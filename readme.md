@@ -127,3 +127,8 @@ Q: hook 怎么知道当前是 mount 还是 update?
 
 hook 如何知道自身数据保存在哪里?
 可以记录当前正在 render 的 FC 对应 fiberNode,在 fiberNode 中保存 hook 数据
+
+首先先实现一个内部数据共享层 —— 在 react 这个包下创建了`resolveDispatcher`，这个就是内部数据共享层下的保存的当前 hooks 的集合对象。
+\_\_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED：内部数据共享层
+\_\_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED 会在 shared 中的 internals 中被导出。
+然后又在 react-reconciler 中的 fiberHooks 被引入，然后能获取到`currentDispatcher`
