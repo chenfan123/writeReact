@@ -12,9 +12,13 @@ import { scheduleUpdateOnFiber } from './workLoop';
 /**
  * ReactDOM.createRoot().render()
  * 调用createRoot()方法之后，内部会执行createContainer
+ * container是根节点
+ *
  */
 export function createContainer(container: Container) {
+	// hostRootFiber的tag是3
 	const hostRootFiber = new FiberNode(HostRoot, {}, null);
+	// root是一个FiberRootNode，container是根节点，current指向了hostRootFiber，并让hostRootFiber的stateNode指向了root
 	const root = new FiberRootNode(container, hostRootFiber);
 	hostRootFiber.updateQueue = createUpdateQueue();
 	return root;

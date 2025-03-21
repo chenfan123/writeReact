@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { useState } from 'react';
 
 function Child() {
-	const [num, setNum] = useState(1);
+	const [num, setNum] = useState(12);
 	window.setNum = setNum;
 	return <div>{num}</div>;
 }
@@ -18,4 +19,4 @@ function App() {
 	);
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
