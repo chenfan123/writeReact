@@ -1,5 +1,7 @@
 import { ReactElementType } from 'shared/ReactTypes';
+import { mountChildFibers, reconcileChildFibers } from './childFibers';
 import { FiberNode } from './fiber';
+import { renderWithHooks } from './fiberHooks';
 import { processUpdateQueue, UpdateQueue } from './updateQueue';
 import {
 	FunctionComponent,
@@ -7,8 +9,6 @@ import {
 	HostRoot,
 	HostText
 } from './workTags';
-import { mountChildFibers, reconcileChildFibers } from './childFibers';
-import { renderWithHooks } from './fiberHooks';
 
 // 递归中的递阶段
 export const beginWork = (wip: FiberNode) => {
@@ -63,6 +63,7 @@ function reconcileChildren(wip: FiberNode, children?: ReactElementType) {
 	const current = wip.alternate; // 因为要对比current fiberNode和reactElement,生成子节点的wip fiberNode
 	if (current !== null) {
 		// update
+		console.log(555);
 		wip.child = reconcileChildFibers(wip, current?.child, children);
 	} else {
 		// mount流程，此处可以优化，很多节点多次Placement可以在构建好离屏DOM树的时候执行1次Placement

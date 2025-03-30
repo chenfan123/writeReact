@@ -1,22 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import ReactDOM from 'react-dom';
-import React from 'react';
 import { useState } from 'react';
-
-function Child() {
-	const [num, setNum] = useState(12);
-	window.setNum = setNum;
-	return <div>{num}</div>;
-}
+import ReactDOM from 'react-dom/client';
 
 function App() {
-	return (
-		<div>
-			<span>
-				<Child />
-			</span>
-		</div>
-	);
+	const [num, setNum] = useState(100);
+	window.setNum = setNum;
+	return num === 3 ? <Child /> : <div>{num}</div>;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+function Child() {
+	return <span>big-react</span>;
+}
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+	<App />
+);
